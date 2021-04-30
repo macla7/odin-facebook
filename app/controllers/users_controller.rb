@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /users or /users.json
   def index
@@ -67,3 +68,17 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name)
     end
 end
+
+
+## class SessionsController < ApplicationController
+##   def create
+##     user = User.from_omniauth(env["omniauth.auth"])
+##     session[:user_id] = user.id
+##     redirect_to root_url
+##   end
+## 
+##   def destroy
+##     session[:user_id] = nil
+##     redirect_to root_url
+##   end
+## end
