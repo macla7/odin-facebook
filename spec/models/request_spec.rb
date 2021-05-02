@@ -2,9 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Request, type: :model do
 
-  let(:user1) { User.new(name: 'User1')}
-  let(:user2) { User.new(name: 'User2')}
-
+  let(:user1) { User.new(
+    name: 'Anything',
+    email: 'mitch@mitch',
+    password: 'Bing111'
+    )}
+  let(:user2) { User.new(
+    name: 'Something',
+    email: 'lich@lich',
+    password: 'Bing111'
+    )}
   subject { described_class.new(
     user_id: user1.id,
     friend_id: user2.id,

@@ -7,3 +7,10 @@
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+<%= p params %>
+<%= session.each {|i| p i} %>
+<%= p @user.name %>
+<%= current_user.name %>
+<% unless Request.record?(current_user.id, @user.id) %>
+  <%= button_to 'Add Friend', add_friend_path, method: :get %>
+<% end %>

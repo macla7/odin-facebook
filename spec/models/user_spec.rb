@@ -2,14 +2,21 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  subject { described_class.new(name: 'Anything')}
-  let (:friend) { User.new(name: 'Something')}
+  subject { described_class.new(
+    name: 'Anything',
+    email: 'mitch@mitch',
+    password: 'Bing111'
+    )}
+  let (:friend) { User.new(
+    name: 'Something',
+    email: 'lich@lich',
+    password: 'Bing111'
+    )}
   let (:request) { Request.new(
     user_id: subject.id,
     friend_id: friend.id,
-    confirmed: true
+    confirmed: true,
     )}
-  
 
   it 'is valid with name' do
     expect(subject).to be_valid

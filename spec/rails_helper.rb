@@ -61,4 +61,17 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+  :provider => 'facebook',
+  :uid => '123545',
+  :info => {
+    :name => 'mockuser',
+    :email => 'mitchclarkmapie@hotmail.com'
+  }
+ })
+
+
 end
+
