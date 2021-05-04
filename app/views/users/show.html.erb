@@ -1,16 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<div>
+  <h1><%= @user.name %></h1>
+  <% if current_user.friends_with?(@user) %>
+    <em><p>friends</p></em>
+  <% end %>
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
-<%= p params %>
-<%= session.each {|i| p i} %>
-<%= p @user.name %>
+
 <%= current_user.name %>
-<% unless Request.record?(current_user.id, @user.id) %>
+<% if !Request.record?(current_user.id, @user.id) %>
   <%= button_to 'Add Friend', add_friend_path, method: :get %>
+<% elsif Request.got_request?(@user.id, current_user.id) %>
+  <%= button_to 'Accept Friend Request', accept_request_path, method: :get %>
 <% end %>

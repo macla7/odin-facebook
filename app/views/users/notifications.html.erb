@@ -1,0 +1,11 @@
+<h1>Notifications for <%= current_user.name%></h1>
+
+<br />
+<h2>Friend Requests</h2>
+<% Request.got_any_requests?(current_user.id).each do |request| %>
+  <% user = User.where(id: request[:user_id]).first %>
+  <%= button_to user.name, user, method: :get %>
+  <%= form_with url: "/users/#{user.id}/accept", method: :get do |form| %>
+    <%= form.submit 'Accept Request' %>
+  <% end %>
+<% end %>

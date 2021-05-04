@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy add_friend ]
+  before_action :set_user, only: %i[ show edit update destroy add_friend accept_request]
+  before_action :set_notf, except: %i[sign_in]
   before_action :authenticate_user!
 
   # GET /users or /users.json
@@ -57,10 +58,21 @@ class UsersController < ApplicationController
     end
   end
 
+  # These routes aren't very resourceful like...
   def add_friend
     current_user.send_request(@user)
     redirect_to @user, notice: "Request sent to #{@user.name}!" 
   end
+
+  def accept_request
+    record = Request.where(user_id: @user.id, friend_id: current_user.id)
+    record.first.update(confirmed: true)
+    redirect_to @user, notice: "Accepted #{@user.name}'s Request !" 
+  end
+
+  def notifications
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -71,6 +83,10 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:name)
+    end
+
+    def set_notf
+      @n1 = Request.got_any_requests?(current_user).length
     end
 end
 
