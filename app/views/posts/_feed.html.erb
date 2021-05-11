@@ -1,0 +1,16 @@
+<div>
+  <%= render 'form', post: @post %>
+</div>
+
+<% @posts.reverse.each do |post| %>
+  <div>
+    <div class='post'>
+      <h3><strong><%= post.user.name %></strong><br /></h3>
+      <small><%= post.user.email%></small><br />
+      <p><%= post.content %></p>
+      <p><%= post.your_likes.count %> <%= post.your_likes.count == 1 ? 'Like' : 'Likes' %></p>
+      <%= button_to 'More info', post, method: :get %>
+    </div>
+
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<% type_of_like = @post.your_likes.find {|like| like.user_id == current_user.id } %>
+<% if type_of_like %>
+  <%= p type_of_like %>
+  <%= button_to 'Unlike', post_like_path(@post, type_of_like), method: :delete %>
+<% else %>
+  <%= button_to 'Like', post_likes_path(@post), method: :post %>
+<% end %>
+<%= p @post.content %>
+
+<p><%= @post.your_likes.count %> <%= @post.your_likes.count == 1 ? 'Like' : 'Likes' %> </p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

@@ -3,12 +3,20 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, stretches: 13
+  devise :omniauthable, omniauth_providers: %i[facebook]
+
+  # Request model
   has_many :requests
   has_many :pending_requests, -> { where confirmed: false }, class_name: 'Request', foreign_key: 'friend_id'
   has_many :sent_requests, -> { where confirmed: false }, class_name: 'Request', foreign_key: 'user_id'
+
+  # Post model
+  has_many :posts
+  has_many :likes
+  has_many :your_likes, class_name: 'Like', through: :posts, inverse_of: 'postee', source: :event
   
-  devise :database_authenticatable, :registerable, :recoverable, stretches: 13
-  devise :omniauthable, omniauth_providers: %i[facebook]
+
 
 
   validates :name, presence: true
