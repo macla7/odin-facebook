@@ -1,15 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<% type_of_like = @post.your_likes.find {|like| like.user_id == current_user.id } %>
-<% if type_of_like %>
-  <%= p type_of_like %>
-  <%= button_to 'Unlike', post_like_path(@post, type_of_like), method: :delete %>
-<% else %>
-  <%= button_to 'Like', post_likes_path(@post), method: :post %>
-<% end %>
-<%= p @post.content %>
+<div id='comment-body'>
+  <h2>Post</h2>
+  <div class='post'>
+    <div id='post-content'>
+      <%= p @post.content %>
+    </div>
+    <p><%= @post.your_likes.count %> <%= @post.your_likes.count == 1 ? 'Like' : 'Likes' %> </p>
+  </div>
+</div>
 
-<p><%= @post.your_likes.count %> <%= @post.your_likes.count == 1 ? 'Like' : 'Likes' %> </p>
+<div id='like'>
+  <% type_of_like = @post.your_likes.find {|like| like.user_id == current_user.id } %>
+  <% if type_of_like %>
+    <%= button_to 'Unlike', post_like_path(@post, type_of_like), method: :delete %>
+  <% else %>
+    <%= button_to 'Like', post_likes_path(@post), method: :post %>
+  <% end %>
+</div>
+
+<div id='comment-section'>
+  <h3>Comments</h3>
+  <% if @post.comments %>
+    <% @post.comments.each do |comment| %>
+      <div class='comment'>
+        <p><em><%= User.find_by(id: comment.user_id).name %></em></p>
+        <p><%= comment.content %></p>
+      </div>
+    <% end %>
+  <% end %>
+  <%= form_with url: post_comments_path(@post) do |form| %>
+    <%= form.text_field :content %>
+    <%= form.submit 'Comment' %>
+  <% end %>
+</div>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

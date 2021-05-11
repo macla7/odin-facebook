@@ -3,14 +3,31 @@
 </div>
 
 <% @posts.reverse.each do |post| %>
-  <div>
-    <div class='post'>
-      <h3><strong><%= post.user.name %></strong><br /></h3>
-      <small><%= post.user.email%></small><br />
-      <p><%= post.content %></p>
-      <p><%= post.your_likes.count %> <%= post.your_likes.count == 1 ? 'Like' : 'Likes' %></p>
-      <%= button_to 'More info', post, method: :get %>
-    </div>
+  <% if current_user.friends_with?(post.user) %>
+    <div class='feed-post'>
+      <div class='post'>
+        <h2><strong><%= post.user.name %></strong></h2>
+        <small><%= post.user.email%></small><br />
+        <p><%= post.content %></p>
+        <p><%= post.your_likes.count %> <%= post.your_likes.count == 1 ? 'Like' : 'Likes' %></p>
+        <%= button_to 'More info', post, method: :get %>
+      </div>
 
-  </div>
+      <div id='comment-section'>
+        <h3>Comments</h3>
+        <% if post.comments %>
+          <% post.comments.each do |comment| %>
+            <div class='comment'>
+              <p><em><%= User.find_by(id: comment.user_id).name %></em></p>
+              <p><%= comment.content %></p>
+            </div>
+          <% end %>
+        <% end %>
+        <%= form_with url: post_comments_path(post) do |form| %>
+          <%= form.text_field :content %>
+          <%= form.submit 'Comment' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 <% end %>

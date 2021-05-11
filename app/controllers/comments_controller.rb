@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :find_post
 
   def create
-    @post.comments.create(user_id: current_user.id)
+    @post.comments.create(user_id: current_user.id, content: params[:content])
     redirect_to post_path(@post)
   end
 
