@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @users = User.all.with_attached_avatar
   end
 
   # GET /users/1 or /users/1.json
@@ -27,6 +27,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        @user.avatar.attach(params[:avatar])
         format.html { redirect_to @user, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -82,7 +83,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name)
+      params.require(:user).permit(:name, :avatar)
     end
 
     def set_notf

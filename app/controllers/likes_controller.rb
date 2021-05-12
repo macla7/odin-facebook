@@ -1,6 +1,7 @@
 class LikesController < ApplicationController
   before_action :find_post
   before_action :find_like, only: [:destroy]
+  before_action :authenticate_user!
 
   def create
     if already_liked?

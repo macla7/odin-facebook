@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :likes
   has_many :your_likes, class_name: 'Like', through: :posts, inverse_of: 'postee', source: :event
+  has_one_attached :avatar, dependent: :destroy
   
 
 

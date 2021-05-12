@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
   resources :users
-  root 'users#index'
+  root 'posts#index'
   get 'users/:id/request', to: 'users#add_friend', as: 'add_friend'
   get 'users/:id/accept', to: 'users#accept_request', as: 'accept_request'
   get 'users/:id/notifications', to: 'users#notifications', as: 'notifications'
