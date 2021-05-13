@@ -46,3 +46,9 @@ Active Storage:
     <li>Biggest time drain here was I also needed to sanitise the extra attribute in the application controller.. Without doing this I don't think it was leting the avatar same properly...</li>
     <li> ALSO: was trying to understand the resize_to_limit method that the image processing gem can use but fuck, whatever is going on here i have no idea. installed some massive package via 'brew install imagemagick vips' and cancelled half way through. But now this method seems to be working.. Need to find out how what when why. Investigate homebrew more</li>
   </ul>
+
+Environment Variables:
+  <ul>
+    <li>Seem to have got working the credentials.yml.enc file in config folder. When you use Vscode as an editor, you have to access it a bit of a funky way.. Like so -> "EDITOR="code --wait" bin/rails credentials:edit".</li>
+    <li>figured out you have to make it wait, and also just got general help, by this guide <a href="https://blog.saeloun.com/2019/10/10/rails-6-adds-support-for-multi-environment-credentials.html">here</a></li>
+  </ul>
