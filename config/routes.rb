@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :likes
     resources :comments
   end
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: 'users/sessions' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations'}
   resources :users
   root 'posts#index'
   get 'users/:id/request', to: 'users#add_friend', as: 'add_friend'

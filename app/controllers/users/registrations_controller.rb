@@ -12,7 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    session[:user_id] = @user.id
+    puts 'HEELLLLOOOW'
+    UserMailer.with(user: @user).welcome_email.deliver_now
+    puts ' HEYEEE   '
   end
 
   # GET /resource/edit
@@ -60,13 +62,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  private
-
-  def sign_up_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
-  end
-
-  def account_update_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :avatar)
-  end
 end

@@ -1,26 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Users</h1>
-<p><%#= session.each { |k, v| puts "key:#{k}, value:#{v} \n"} %></p>
-<p><%#= p session[:user_id] %></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
+<% ['Friends', 'Strangers'].each do |i| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= button_to user.name, user, method: :get %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th><%= i %></th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <% j = false %>
+        <% j = true if i == 'Friends' %>
+        <% if current_user.friends_with?(user) == j %>
+          <tr>
+            <td><%= button_to user.name, user, method: :get %></td>
+            <td><%= link_to 'Edit', edit_user_path(user) %></td>
+            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <%= link_to 'New User', new_user_path %>
