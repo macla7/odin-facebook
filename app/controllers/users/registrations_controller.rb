@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     puts 'HEELLLLOOOW'
-    UserMailer.with(user: @user).welcome_email.deliver_now
+    #UserMailer.with(user: @user).welcome_email.deliver_now
     puts ' HEYEEE   '
   end
 
