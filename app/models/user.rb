@@ -12,8 +12,8 @@ class User < ApplicationRecord
   has_many :sent_requests, -> { where confirmed: false }, class_name: 'Request', foreign_key: 'user_id'
 
   # Post model
-  has_many :posts, :requests, dependent: :destroy
-  has_many :likes, :requests, dependent: :destroy
+  has_many :posts
+  has_many :likes
   has_many :your_likes, class_name: 'Like', through: :posts, inverse_of: 'postee', source: :event
   has_one_attached :avatar, dependent: :destroy
   
