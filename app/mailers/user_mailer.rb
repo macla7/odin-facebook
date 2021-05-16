@@ -71,7 +71,7 @@ class UserMailer < ApplicationMailer
       source: sender,
       # Comment or remove the following line if you are not using 
       # a configuration set
-      configuration_set_name: configsetname,
+      # configuration_set_name: configsetname,
       })
       puts "Email sent BOI!"
 
