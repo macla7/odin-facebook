@@ -17,12 +17,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     puts ' HEYEEE   '
     s3_client = Aws::S3::Client.new(region: 'ap-southeast-2')
     bucket_name = 'odinfacebookbucket'
-    key = "#{current_user.name} profile pic"
     content = current_user.avatar
-    def object_uploaded?(s3_client, bucket_name, object_key, object_content)
+    def object_uploaded?(s3_client, bucket_name, object_content)
       response = s3_client.put_object(
         bucket: bucket_name,
-        key: key,
+        key: "#{current_user.name} profile pic",
         body: content
       )
       if response.etag
