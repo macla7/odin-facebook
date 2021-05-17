@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <% if @user.avatar.representable? %>
-  <%= image_tag @user.avatar.variant(resize_to_limit: [300, 300]) %>
+  <%= image_tag @user.avatar.variant(:thumb) %>
 <% end %>
 
 <div>
