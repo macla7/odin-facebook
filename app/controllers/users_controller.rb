@@ -24,9 +24,26 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-    @user.avatar.attach(
-      filename: "#{@user.name} profile pic"
-    )
+    s3_client = Aws::S3::Client.new(region: 'ap-southeast-2')
+    bucket_name = 'odinfacebookbucket'
+    key = "#{user.name} profile pic"
+    content = @user.avatar
+    def object_uploaded?(s3_client, bucket_name, object_key, object_content)
+      response = s3_client.put_object(
+        bucket: bucket_name,
+        key: key,
+        body: content
+      )
+      if response.etag
+        return true
+      else
+        return false
+      end
+  rescue StandardError => e
+      puts "Error uploading object: #{e.message}"
+      return false
+  end
+    object_uploaded?(s3_client, bucket_name, key, content)
 
     respond_to do |format|
       if @user.save
