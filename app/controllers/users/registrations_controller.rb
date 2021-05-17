@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     puts ' HEYEEE   '
     s3_client = Aws::S3::Client.new(region: 'ap-southeast-2')
     bucket_name = 'odinfacebookbucket'
-    key = "#{user.name} profile pic"
+    key = "#{@user.name} profile pic"
     content = @user.avatar
     def object_uploaded?(s3_client, bucket_name, object_key, object_content)
       response = s3_client.put_object(
