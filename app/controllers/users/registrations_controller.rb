@@ -15,6 +15,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
     puts 'HEELLLLOOOW'
     UserMailer.with(user: current_user).welcome_email.deliver_now
     puts ' HEYEEE   '
+    s3_client = Aws::S3::Client.new(region: 'ap-southeast-2')
+    bucket_name = 'odinfacebookbucket'
+    key = "#{user.name} profile pic"
+    content = @user.avatar
+    def object_uploaded?(s3_client, bucket_name, object_key, object_content)
+      response = s3_client.put_object(
+        bucket: bucket_name,
+        key: key,
+        body: content
+      )
+      if response.etag
+        return true
+      else
+        return false
+      end
+    rescue StandardError => e
+        puts "Error uploading object: #{e.message}"
+        return false
+    end
+    object_uploaded?(s3_client, bucket_name, key, content)
   end
 
   # GET /resource/edit
