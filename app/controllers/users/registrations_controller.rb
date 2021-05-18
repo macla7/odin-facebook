@@ -18,10 +18,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     s3_client = Aws::S3::Client.new(region: 'ap-southeast-2')
     bucket_name = 'odinfacebookbucket'
     content = current_user.avatar
-    def object_uploaded?(s3_client, bucket_name, object_content)
+    keybe = "#{current_user.name} profile pic"
+    def object_uploaded?(s3_client, bucket_name, object_content, keybe)
       response = s3_client.put_object(
         bucket: bucket_name,
-        key: "#{current_user.name} profile pic",
+        key: keybe,
         body: content
       )
       if response.etag
@@ -33,7 +34,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         puts "Error uploading object: #{e.message}"
         return false
     end
-    object_uploaded?(s3_client, bucket_name, key, content)
+    object_uploaded?(s3_client, bucket_name, content, keybe)
   end
 
   # GET /resource/edit
