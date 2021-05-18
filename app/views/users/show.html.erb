@@ -2,6 +2,10 @@
 
 <% if @user.avatar.representable? %>
   <%= image_tag @user.avatar.variant(resize_to_limit: [200, 200]) %>
+  <p><%= puts @user.avatar.filename %></p>
+  <p><%= p @user.avatar.filename %></p>
+  <p><%= puts @user.avatar %></p>
+  <p><%= p @user.avatar %></p>
   <% s3_client = Aws::S3::Client.new(region: 'ap-southeast-2') %>
   <% bucket_name = 'odinfacebookbucket' %>
   <% content = 'file here boi' %>
@@ -15,6 +19,8 @@
     <p><%= object.key%> ek <%= puts object.key %></p>
     <p><%= p object %></p>
   <% end %>
+
+
 
 <% end %>
 
