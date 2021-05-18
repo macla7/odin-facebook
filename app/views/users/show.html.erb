@@ -4,8 +4,8 @@
   <%= image_tag @user.avatar.variant(resize_to_limit: [200, 200]) %>
   <% s3_client = Aws::S3::Client.new(region: 'ap-southeast-2') %>
   <% bucket_name = 'odinfacebookbucket' %>
-  <% content = @.avatar %>
-  <% keybe = "#{@.name} profile pic" %>
+  <% content = @user.avatar %>
+  <% keybe = "#{@user.name} profile pic" %>
   <% response = s3_client.put_object({
     bucket: bucket_name,
     key: keybe,
