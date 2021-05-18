@@ -12,10 +12,8 @@
     body: content
   }) %>
   <% @objects.each do |object| %>
-    <%= puts object.key %>
-    <p><%= object.filename %> ek <%= puts object.filename %></p>
-    <p><%= object.key%><%= puts object.key %></p>
-    <p><%= object.metadata %> ek <%= puts object.metadata %></p>
+    <p><%= object.key%> ek <%= puts object.key %></p>
+    <p><%= p object %></p>
   <% end %>
 
 <% end %>
