@@ -39,7 +39,7 @@ class UserMailer < ApplicationMailer
     # Create a new SES resource and specify a region
     ses = Aws::SES::Client.new(
       region: awsregion,
-      credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
+      credentials: Aws::Credentials.new(Rails.application.credentials.aws[:AWS_ACCESS_KEY_ID], Rails.application.credentials.aws[:AWS_SECRET_ACCESS_KEY])
     )
 
     # Try to send the email.
