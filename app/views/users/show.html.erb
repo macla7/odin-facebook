@@ -5,7 +5,10 @@
   <p><%= p @user.avatar.filename %></p>
   <p><%= p @user.avatar %></p>
   <p><%= p @user.avatar.attributes %><p>
-  <% s3_client = Aws::S3::Client.new(region: 'ap-southeast-2') %>
+  <% s3_client = Aws::S3::Client.new(
+    region: 'ap-southeast-2',
+    access_key_id: Rails.application.credentials.aws[:ADMIN_ACCESS_KEY_ID],
+    secret_access_key: Rails.application.credentials.aws[:ADMIN_SECRET_ACCESS_KEY]) %>
   <% bucket_name = 'odinfacebookbucket' %>
   <% content = 'file here boi' %>
   <% keybe = "#{@user.name} profile pic" %>
