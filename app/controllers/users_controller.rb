@@ -10,7 +10,10 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    s3_client = Aws::S3::Client.new(region: 'ap-southeast-2')
+    s3_client = Aws::S3::Client.new(
+      region: 'ap-southeast-2',
+      access_key_id: Rails.application.credentials.aws[:ADMIN_ACCESS_KEY_ID],
+      secret_access_key: Rails.application.credentials.aws[:ADMIN_SECRET_ACCESS_KEY])
     bucket_name = 'odinfacebookbucket'
     max_objects = 50
     @objects = s3_client.list_objects_v2(

@@ -15,7 +15,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     puts 'HEELLLLOOOW'
     UserMailer.with(user: current_user).welcome_email.deliver_now
     puts ' HEYEEE   '
-    s3_client = Aws::S3::Client.new(region: 'ap-southeast-2')
+    s3_client = Aws::S3::Client.new(
+      region: 'ap-southeast-2',
+      access_key_id: Rails.application.credentials.aws[:ADMIN_ACCESS_KEY_ID],
+      secret_access_key: Rails.application.credentials.aws[:ADMIN_SECRET_ACCESS_KEY])
     bucket_name = 'odinfacebookbucket'
     content = current_user.avatar
     keybe = "#{current_user.name} profile pic"
