@@ -9,20 +9,28 @@ class LikesController < ApplicationController
     else
       @post.your_likes.create(user_id: current_user.id, postee_id: @post.user.id)
     end
-    redirect_to post_path(@post)
+    if params[:feed]
+      redirect_to posts_path
+    else
+      redirect_to post_path(@post)
+    end
   end
 
   def destroy
-    p 'hey look at me'
-    p params
-    p params[:id]
-    p 'bye'
     if !already_liked?
       flash[:notice] = "You haven't liked it."
     else
       @like.destroy
     end
-    redirect_to post_path(@post)
+    puts "hello"
+    puts params
+    p params
+    puts 'bye bye'
+    if params[:feed]
+      redirect_to posts_path
+    else
+      redirect_to post_path(@post)
+    end
   end
 
   private

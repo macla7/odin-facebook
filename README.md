@@ -56,3 +56,10 @@ Environment Variables:
     Then i had to make sure, wherever I am calling the aws client, be it s3 or SES or whatever, that i was using my new creds (from their new location) which is Rails.application.credentials.aws (or .facebook).<br />
     Now on to Appeas amazon...</li>
   </ul>
+
+  Things to change still:
+  <ul>
+    <li>Clean up likes code, with some clean renders of partials.</li>
+    <li>Make sure you don't need to friend yourself, and that you can see your own posts on wall, as well as others posts on their wall...</li>
+    <li> Also see you're own posts on feed</li>
+  </ul>

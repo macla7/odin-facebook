@@ -2,27 +2,30 @@
 
 <% if @user.avatar.representable? %>
   <%= image_tag @user.avatar.variant(resize_to_limit: [200, 200]) %>
-  <p><%= p @user.avatar.filename %></p>
-  <p><%= p @user.avatar %></p>
-  <p><%= p @user.avatar.attributes %><p>
-  <% s3_client = Aws::S3::Client.new(
+  <!-- The below was me simply fiddlying around, seeing
+    what information I could get out of Active Storage 
+    and then also the s3 bucket.
+
+  <p><%#= p @user.avatar.filename %></p>
+  <p><%#= p @user.avatar %></p>
+  <p><%#= p @user.avatar.attributes %><p>
+  <%# s3_client = Aws::S3::Client.new(
     region: 'ap-southeast-2',
     access_key_id: Rails.application.credentials.aws[:ADMIN_ACCESS_KEY_ID],
     secret_access_key: Rails.application.credentials.aws[:ADMIN_SECRET_ACCESS_KEY]) %>
-  <% bucket_name = 'odinfacebookbucket' %>
-  <% content = 'file here boi' %>
-  <% keybe = "#{@user.name} profile pic" %>
-  <% response = s3_client.put_object({
+  <%# bucket_name = 'odinfacebookbucket' %>
+  <%# content = 'file here boi' %>
+  <%# keybe = "#{@user.name} profile pic" %>
+  <%# response = s3_client.put_object({
     bucket: bucket_name,
     key: keybe,
     body: content
   }) %>
-  <% @objects.each do |object| %>
-    <p><%= object.key%> ek <%= puts object.key %></p>
-    <p><%= p object %></p>
-  <% end %>
-
-
+  <%# @objects.each do |object| %>
+    <p><%#= object.key%> ek <%#= puts object.key %></p>
+    <p><%#= p object %></p>
+  <%# end %>
+  -->
 
 <% end %>
 

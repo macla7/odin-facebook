@@ -9,8 +9,18 @@
         <h2><strong><%= post.user.name %></strong></h2>
         <small><%= post.user.email%></small><br />
         <p><%= post.content %></p>
+        <%= image_tag post.photo.variant(resize_to_limit: [200, 200])  %>
         <p><%= post.your_likes.count %> <%= post.your_likes.count == 1 ? 'Like' : 'Likes' %></p>
-        <%= button_to 'More info', post, method: :get %>
+
+        <div id='like'>
+          <% type_of_like = post.your_likes.find {|like| like.user_id == current_user.id } %>
+          <% if type_of_like %>
+            <%= button_to 'Unlike', post_like_path(post, type_of_like), method: :delete, params: {feed: true} %>
+          <% else %>
+            <%= button_to 'Like', post_likes_path(post), method: :post, params: {feed: true} %>
+          <% end %>
+        </div>
+        <%= button_to 'See Post', post, method: :get %>
       </div>
 
       <div id='comment-section'>

@@ -4,7 +4,8 @@
   <h2>Post</h2>
   <div class='post'>
     <div id='post-content'>
-      <%= p @post.content %>
+      <p><%= @post.content %></p>
+      <%= image_tag @post.photo.variant(resize_to_limit: [200, 200])  %>
     </div>
     <p><%= @post.your_likes.count %> <%= @post.your_likes.count == 1 ? 'Like' : 'Likes' %> </p>
   </div>

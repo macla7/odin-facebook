@@ -16,6 +16,13 @@
     <%= form.text_field :content %>
   </div>
 
+    <div>
+    <%= form.label :photo, 'Upload an image to your post:'%>
+    <%= form.file_field :photo %>
+  </div>
+
+
+
   <div class="actions">
     <%= form.submit 'Post it' %>
   </div>
