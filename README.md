@@ -51,4 +51,8 @@ Environment Variables:
   <ul>
     <li>Seem to have got working the credentials.yml.enc file in config folder. When you use Vscode as an editor, you have to access it a bit of a funky way.. Like so -> "EDITOR="code --wait" bin/rails credentials:edit".</li>
     <li>figured out you have to make it wait, and also just got general help, by this guide <a href="https://blog.saeloun.com/2019/10/10/rails-6-adds-support-for-multi-environment-credentials.html">here</a></li>
+    <li>MASSIVE HICCUP: Was taking envs out of .env file, even in production, and then commited this. This made amazon and github wig out at me, for security reasons so fair. I then had to re do ALL my security details and reset them all. <br />
+    The challenge with above --> Was that I needed now to properly set my credentials.yml.enc with all the right things, and then call this file correctly. I needed to also make a change to config/environments/production.rb to uncomment 'config.require_master_key = true' according to <a href='https://dev.to/n350071/extractcredentialsprovider-cannot-load-rails-config-activestorage-service-aws-sigv4-errors-missingcredentialserror-4ge7'>this sit</a>. <br />
+    Then i had to make sure, wherever I am calling the aws client, be it s3 or SES or whatever, that i was using my new creds (from their new location) which is Rails.application.credentials.aws (or .facebook).<br />
+    Now on to Appeas amazon...</li>
   </ul>
