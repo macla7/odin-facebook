@@ -53,4 +53,16 @@ class User < ApplicationRecord
       # user.skip_confirmation!
     end
   end
+
+  def friends_and_my_posts
+    friends = self.friends
+    @friends_and_my_posts = []
+    friends.each do |f|
+      @friends_and_my_posts.push(f.posts)
+    end
+    @friends_and_my_posts.push(self.posts)
+    @friends_and_my_posts = @friends_and_my_posts.flatten
+    @friends_and_my_posts = @friends_and_my_posts.sort_by { |po| po.updated_at }.reverse.take(10)
+    @friends_and_my_posts
+  end
 end

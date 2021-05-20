@@ -1,0 +1,8 @@
+<div id='like'>
+  <% type_of_like = post.your_likes.find {|like| like.user_id == current_user.id } %>
+  <% if type_of_like %>
+    <%= button_to 'Unlike', post_like_path(post, type_of_like), method: :delete, params: {is_feed: is_feed} %>
+  <% else %>
+    <%= button_to 'Like', post_likes_path(post), method: :post, params: {is_feed: is_feed} %>
+  <% end %>
+</div>

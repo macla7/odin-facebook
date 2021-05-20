@@ -59,7 +59,7 @@ Environment Variables:
 
   Things to change still:
   <ul>
-    <li>Clean up likes code, with some clean renders of partials.</li>
+    <li>DONE -- Clean up likes code, with some clean renders of partials.</li>
     <li>Make sure you don't need to friend yourself, and that you can see your own posts on wall, as well as others posts on their wall...</li>
     <li> Also see you're own posts on feed</li>
   </ul>

@@ -9,7 +9,7 @@ class LikesController < ApplicationController
     else
       @post.your_likes.create(user_id: current_user.id, postee_id: @post.user.id)
     end
-    if params[:feed]
+    if params[:is_feed] == 'true'
       redirect_to posts_path
     else
       redirect_to post_path(@post)
@@ -22,11 +22,7 @@ class LikesController < ApplicationController
     else
       @like.destroy
     end
-    puts "hello"
-    puts params
-    p params
-    puts 'bye bye'
-    if params[:feed]
+    if params[:is_feed] == 'true'
       redirect_to posts_path
     else
       redirect_to post_path(@post)

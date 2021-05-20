@@ -4,8 +4,8 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
     @post = Post.new
+    @friends_and_my_posts = current_user.friends_and_my_posts
   end
 
   # GET /posts/1 or /posts/1.json
