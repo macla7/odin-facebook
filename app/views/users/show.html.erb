@@ -49,4 +49,8 @@
   <% end %>
 <% end %>
 
-<%= render 'feed', posts_type: @my_posts %>
+<% if @user == current_user %>
+  <%= render 'posts/form', post: @post %>
+<% end %>
+<%= render 'feed', posts_type: @user_posts %>
+

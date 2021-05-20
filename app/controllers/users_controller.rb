@@ -10,7 +10,8 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @my_posts = @user.posts
+    @post = Post.new()
+    @user_posts = @user.posts
     s3_client = Aws::S3::Client.new(
       region: 'ap-southeast-2',
       access_key_id: Rails.application.credentials.aws[:ADMIN_ACCESS_KEY_ID],
